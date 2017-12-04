@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .float{
+            float:left;
+            margin-right: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Profiles</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+{% if profiles is empty %}
+<h2>No Profiles</h2>
+{% else %}
+<table class="table table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th>Fullname</th>
+        <th></th>
+    </tr>
+    {% for profile in profiles %}
+        <tr>
+            <td>{{profile.Id}}</td>
+            <td>{{profile.Uname}}</td>
+            <td>{{profile.Upass}}</td>
+            <td>{{profile.Role}}</td>
+            <td>{{profile.Fullname}}</td>
+            <td><a href="UpdateProfileById.php?id={{profile.Id}}">Update</a> / <a href="DeleteProfileById.php?id={{profile.Id}}" onclick="return confirm('Are you sure?')">Delete</a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<h3>Search by ID</h3>
+<form class="float" action="ProfileById.php" method="post">
+    <label for="id">Profile ID:</label>
+    <input type="number" name="id">
+    <input type="submit" name="submit" value="Search">
+</form>
+<form action="AllProfiles.php">
+    <input type="submit" value="Get All Profiles">
+</form>
+<br>
+<br><br>
+
+<h3>New Profile</h3>
+<form action="NewProfile.php" method="post">
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" name="uname"/></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" name="upass"/></td>
+        <tr>
+        <tr>
+            <td>Full Name:</td>
+            <td>
+                <input type="text" name="fullname"/></td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td>
+                <input type="number" step="0.01" name="role" value="0"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input style="width: 100%" type="submit" value="Create"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
