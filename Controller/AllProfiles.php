@@ -16,5 +16,3 @@
     $template = $twig->loadTemplate('profiles.twig');
     $parametersToTwig = array("profiles" => $profiles);
     echo $template->render($parametersToTwig);
-
-?>
